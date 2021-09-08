@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Account Manager</string>
+    <string name="login">Login Here</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="loginBTN">Login</string>
+    <string name="newAcc">New user? Create new Account...</string>
+    <string name="register">Register</string>
+    <string name="name">Name</string>
+
 </resources>
