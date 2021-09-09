@@ -7,5 +7,9 @@
     <string name="newAcc">New user? Create new Account...</string>
     <string name="register">Register</string>
     <string name="name">Name</string>
+    <string name="already">Already An User? Click Here...</string>
+    <string name="signup">Sign Up</string>
+    <string name="add_your_details_here">Add Your Details here</string>
+    <string name="dashboard">Dashboard</string>
 
 </resources>
