@@ -1,75 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
     android:orientation="vertical"
+    android:background="dr"
     tools:context=".Register">
-
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:orientation="vertical"
-        android:background="#000000">
+        android:layout_height="wrap_content"
+        android:text="@string/register"
+        android:textSize="45dp"
+        android:textAlignment="center"
+        android:paddingTop="20dp"
 
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="match_parent"
-            android:layout_height="73dp"
-            android:fontFamily="@font/acme"
-            android:text="@string/register"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:textSize="34sp" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="83dp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="533dp"
-        android:orientation="vertical">
-
-        <EditText
-            android:id="@+id/editTextTextPersonName"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:backgroundTint="#FFFFFF"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="@string/name"
-            android:textColor="#FFFFFF" />
-
-        <EditText
-            android:id="@+id/editTextTextEmailAddress"
-            android:layout_width="match_parent"
-            android:layout_height="98dp"
-            android:backgroundTint="#FFFFFF"
-            android:ems="10"
-            android:inputType="textEmailAddress"
-            android:textColor="#FFFFFF"
-            tools:text="@string/email" />
-
-        <EditText
-            android:id="@+id/editTextTextPassword2"
-            android:layout_width="match_parent"
-            android:layout_height="97dp"
-            android:backgroundTint="#FFFFFF"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:textColor="#FFFFFF"
-            tools:text="@string/password" />
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:text="Button" />
-
-    </LinearLayout>
+        />
 </LinearLayout>
