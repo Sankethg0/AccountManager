@@ -11,5 +11,6 @@
     <string name="signup">Sign Up</string>
     <string name="add_your_details_here">Add Your Details here</string>
     <string name="dashboard">Dashboard</string>
+    <string name="username">Username</string>
 
 </resources>

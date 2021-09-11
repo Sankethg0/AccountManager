@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/black"
         android:ems="10"
-        android:hint="@string/email"
+        android:hint="@string/username"
         android:inputType="textEmailAddress"
         android:paddingTop="125dp"
         android:textColor="@color/black"

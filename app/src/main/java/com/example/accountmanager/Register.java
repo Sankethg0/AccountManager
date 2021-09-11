@@ -29,17 +29,17 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        final EditText name=findViewById(R.id.name);
-        final EditText email=findViewById(R.id.email);
-        final EditText pass=findViewById(R.id.password);
-        final Button signupBTN=findViewById(R.id.signupBTN);
+        EditText name=findViewById(R.id.name);
+        EditText email=findViewById(R.id.email);
+        EditText pass=findViewById(R.id.password);
+        Button signupBTN=findViewById(R.id.signupBTN);
 
         signupBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String nameTxt=name.getText().toString();
-                final String passTxt=pass.getText().toString();
-                final String emailTxt=email.getText().toString();
+                String nameTxt=name.getText().toString();
+                String passTxt=pass.getText().toString();
+                String emailTxt=email.getText().toString();
 
 
                 if(nameTxt.isEmpty()||passTxt.isEmpty()||emailTxt.isEmpty()){
@@ -53,10 +53,11 @@ public class Register extends AppCompatActivity {
                                 Toast.makeText(Register.this,"Email already Exists",Toast.LENGTH_SHORT).show();
                             }else{
                                 //Sending data to firebase Realtime Database
-                                databaseReference.child("users").child(emailTxt).child("name").setValue(nameTxt);
+                                databaseReference.child("users").child(emailTxt).child("Name").setValue(nameTxt);
                                 databaseReference.child("users").child(emailTxt).child("password").setValue(passTxt);
 
                                 Toast.makeText(Register.this,"User Registered",Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(getApplicationContext(),Login.class));
                                 finish();
                             }
                         }
