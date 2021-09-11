@@ -24,15 +24,15 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-         EditText email=findViewById(R.id.email);
-         EditText password=findViewById(R.id.password);
-         Button loginBTN=findViewById(R.id.signupBTN);
+         final EditText email=findViewById(R.id.email);
+         final EditText password=findViewById(R.id.password);
+         final Button loginBTN=findViewById(R.id.loginBTN);
 
          loginBTN.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
-                 String emailTxt=email.getText().toString();
-                 String passTxt=password.getText().toString();
+                 final String emailTxt=email.getText().toString();
+                 final String passTxt=password.getText().toString();
 
                  if(emailTxt.isEmpty()||passTxt.isEmpty()){
                      Toast.makeText(Login.this,"Please enter login Details",Toast.LENGTH_SHORT).show();
@@ -44,7 +44,7 @@ public class Login extends AppCompatActivity {
                              //checks if the username exist in the database
                              if (snapshot.hasChild(emailTxt)) {
                                 //username exist in the database and now get the password
-                                 String getPassword=snapshot.child(emailTxt).child("password").getValue(String.class);
+                                 final String getPassword=snapshot.child(emailTxt).child("password").getValue(String.class);
                                  if(getPassword.equals(passTxt)){
                                      Toast.makeText(Login.this,"Successfully logged on",Toast.LENGTH_SHORT).show();
                                      startActivity(new Intent(getApplicationContext(),Dashboard.class));
@@ -53,7 +53,7 @@ public class Login extends AppCompatActivity {
                                      Toast.makeText(Login.this,"Incorrect password",Toast.LENGTH_SHORT).show();
                                  }
                              }else{
-                                 Toast.makeText(Login.this,"Incorrect Password",Toast.LENGTH_SHORT).show();
+                                 Toast.makeText(Login.this,"Incorrect Password2",Toast.LENGTH_SHORT).show();
                              }
 
 
