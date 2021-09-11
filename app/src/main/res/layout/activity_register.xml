@@ -37,7 +37,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:paddingTop="125dp"
-        android:text="@string/name"
+        android:hint="@string/name"
         android:textColorHint="@color/black"
         android:textSize="20sp" />
 
