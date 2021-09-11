@@ -11,6 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 public class Register extends AppCompatActivity {
     //create object of the database reference class to access the firebase
     DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReferenceFromUrl("https://account-manager-76ba4-default-rtdb.firebaseio.com/");
-
+    FirebaseAuth fAuth;
 
 
 
@@ -34,6 +38,8 @@ public class Register extends AppCompatActivity {
         EditText pass=findViewById(R.id.password);
         Button signupBTN=findViewById(R.id.signupBTN);
 
+        fAuth=FirebaseAuth.getInstance();
+
         signupBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,30 +51,36 @@ public class Register extends AppCompatActivity {
                 if(nameTxt.isEmpty()||passTxt.isEmpty()||emailTxt.isEmpty()){
                     Toast.makeText(Register.this,"Fill all the details",Toast.LENGTH_SHORT).show();
                 }else{
-                    databaseReference.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+                    fAuth.createUserWithEmailAndPassword(emailTxt,passTxt).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            //Checks if the email is already available on the database
-                            if(snapshot.hasChild(emailTxt)){
-                                Toast.makeText(Register.this,"Email already Exists",Toast.LENGTH_SHORT).show();
-                            }else{
-                                //Sending data to firebase Realtime Database
-                                databaseReference.child("users").child(emailTxt).child("Name").setValue(nameTxt);
-                                databaseReference.child("users").child(emailTxt).child("password").setValue(passTxt);
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()){
+                                databaseReference.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        //Checks if the email is already available on the database
+                                        if(snapshot.hasChild(emailTxt)){
+                                            Toast.makeText(Register.this,"Email already Exists",Toast.LENGTH_SHORT).show();
+                                        }else{
+                                            //Sending data to firebase Realtime Database
+                                            databaseReference.child("users").child(nameTxt).child("email").setValue(emailTxt);
+                                            databaseReference.child("users").child(nameTxt).child("password").setValue(passTxt);
+                                            Toast.makeText(Register.this,"User Registered",Toast.LENGTH_SHORT).show();
+                                            startActivity(new Intent(getApplicationContext(),Login.class));
+                                            finish();
+                                        }
+                                    }
 
-                                Toast.makeText(Register.this,"User Registered",Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(getApplicationContext(),Login.class));
-                                finish();
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+                            }else{
+                                Toast.makeText(Register.this,"Failed to Register."+task.getException(),Toast.LENGTH_SHORT).show();
                             }
                         }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
                     });
-
-
                 }
             }
         });
