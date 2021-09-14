@@ -21,6 +21,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Register extends AppCompatActivity {
     //create object of the database reference class to access the firebase
     DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReferenceFromUrl("https://account-manager-76ba4-default-rtdb.firebaseio.com/");
@@ -54,30 +57,17 @@ public class Register extends AppCompatActivity {
                     fAuth.createUserWithEmailAndPassword(emailTxt,passTxt).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
-                                databaseReference.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        //Checks if the email is already available on the database
-                                        if(snapshot.hasChild(emailTxt)){
-                                            Toast.makeText(Register.this,"Email already Exists",Toast.LENGTH_SHORT).show();
-                                        }else{
-                                            //Sending data to firebase Realtime Database
-                                            databaseReference.child("users").child(nameTxt).child("email").setValue(emailTxt);
-                                            databaseReference.child("users").child(nameTxt).child("password").setValue(passTxt);
-                                            Toast.makeText(Register.this,"User Registered",Toast.LENGTH_SHORT).show();
-                                            startActivity(new Intent(getApplicationContext(),Login.class));
-                                            finish();
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
-
-                                    }
-                                });
+                            if(!task.isSuccessful()){
+                                Toast.makeText(Register.this,"Sign Up Error",Toast.LENGTH_SHORT);
                             }else{
-                                Toast.makeText(Register.this,"Failed to Register."+task.getException(),Toast.LENGTH_SHORT).show();
+                                String userId=fAuth.getCurrentUser().getUid();
+                                DatabaseReference currentUserDb=FirebaseDatabase.getInstance().getReference().child("user").child(userId);
+                                Map userInfo=new HashMap<>();
+                                userInfo.put("email",emailTxt);
+                                userInfo.put("password",passTxt);
+                                currentUserDb.updateChildren(userInfo);
+                                startActivity(new Intent(getApplicationContext(),Login.class));
+                                finish();
                             }
                         }
                     });

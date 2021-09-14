@@ -10,6 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -17,8 +21,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class Login extends AppCompatActivity {
-    DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReferenceFromUrl("https://account-manager-76ba4-default-rtdb.firebaseio.com/users");
-
+    FirebaseAuth fAuth;
+    Button loginBTN;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +30,8 @@ public class Login extends AppCompatActivity {
 
          final EditText email=findViewById(R.id.email);
          final EditText password=findViewById(R.id.password);
-         final Button loginBTN=findViewById(R.id.loginBTN);
+         loginBTN=findViewById(R.id.loginBTN);
+         fAuth=FirebaseAuth.getInstance();
 
          loginBTN.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -38,30 +43,18 @@ public class Login extends AppCompatActivity {
                      Toast.makeText(Login.this,"Please enter login Details",Toast.LENGTH_SHORT).show();
 
                  }else {
-                     databaseReference.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+                     fAuth.signInWithEmailAndPassword(emailTxt,passTxt).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                          @Override
-                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                             //checks if the username exist in the database
-                             if (snapshot.hasChild(emailTxt)) {
-                                //username exist in the database and now get the password
-                                 final String getPassword=snapshot.child(emailTxt).child("password").getValue(String.class);
-                                 if(getPassword.equals(passTxt)){
-                                     Toast.makeText(Login.this,"Successfully logged on",Toast.LENGTH_SHORT).show();
-                                     startActivity(new Intent(getApplicationContext(),Dashboard.class));
-                                     finish();
-                                 }else{
-                                     Toast.makeText(Login.this,"Incorrect password",Toast.LENGTH_SHORT).show();
-                                 }
-                             }else{
-                                 Toast.makeText(Login.this,"Incorrect Password2",Toast.LENGTH_SHORT).show();
+                         public void onComplete(@NonNull Task<AuthResult> task) {
+                             if(task.isSuccessful()){
+                                 Toast.makeText(Login.this,"Successfully Logged In.",Toast.LENGTH_SHORT).show();
+                                 startActivity(new Intent(getApplicationContext(),Dashboard.class));
+                             }else {
+                                 Toast.makeText(Login.this,"Failed to Log In."+task.getException(),Toast.LENGTH_SHORT).show();
                              }
                          }
-
-                         @Override
-                         public void onCancelled(@NonNull DatabaseError error) {
-
-                         }
                      });
+
                  }
              }
          });
