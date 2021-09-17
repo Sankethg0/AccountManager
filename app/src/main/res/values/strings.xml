@@ -12,5 +12,7 @@
     <string name="add_your_details_here">Add Your Details here</string>
     <string name="dashboard">Dashboard</string>
     <string name="username">Username</string>
+    <string name="addAcc">Add Account</string>
+    <string name="account">Name of the Account</string>
 
 </resources>
