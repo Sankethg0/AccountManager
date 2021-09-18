@@ -18,13 +18,15 @@
         android:text="@string/dashboard" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/tasksRecyclerView"
+        android:id="@+id/userList"
+        android:layout_marginTop="100dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tasksText"
-        android:nestedScrollingEnabled="true"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
+        android:layout_marginBottom="100dp"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
