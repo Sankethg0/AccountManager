@@ -1,6 +1,6 @@
 package com.example.accountmanager;
 
-public class Account {
+public class Account{
     String accName, accPass, accEmail;
 
     public String getAccName() {
