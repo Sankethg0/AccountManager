@@ -1,7 +1,23 @@
 package com.example.accountmanager;
 
 public class Account{
-    String accName, accPass, accEmail;
+    private String accName;
+    private String accPass;
+    private String accEmail;
+
+    public Account(){}
+
+    public void setAccName(String accName) {
+        this.accName = accName;
+    }
+
+    public void setAccPass(String accPass) {
+        this.accPass = accPass;
+    }
+
+    public void setAccEmail(String accEmail) {
+        this.accEmail = accEmail;
+    }
 
     public String getAccName() {
         return accName;

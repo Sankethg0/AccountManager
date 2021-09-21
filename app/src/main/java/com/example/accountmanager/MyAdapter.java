@@ -1,6 +1,5 @@
 package com.example.accountmanager;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,53 +8,44 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.firestore.auth.User;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
-
-    Context context;
-    ArrayList<Account> list;
-
-    public MyAdapter(Context context, ArrayList<Account> list) {
-        this.context = context;
-        this.list = list;
+public class MyAdapter extends FirebaseRecyclerAdapter<Account,MyAdapter.accountViewholder>{
+    public MyAdapter(
+            @NonNull FirebaseRecyclerOptions<Account> options)
+    {
+        super(options);
     }
 
+    @Override
+    protected void
+    onBindViewHolder(@NonNull accountViewholder holder,
+                     int position, @NonNull Account model) {
+        holder.account.setText(model.getAccName());
+        holder.email.setText(model.getAccEmail());
+        holder.password.setText(model.getAccPass());
+    }
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v= LayoutInflater.from(context).inflate(R.layout.item,parent,false);
-        return new MyViewHolder(v);
+    public accountViewholder
+    onCreateViewHolder(@NonNull ViewGroup parent,
+                       int viewType)
+    {
+        View view
+                = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item, parent, false);
+        return new MyAdapter.accountViewholder(view);
     }
-
-    @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Account account=list.get(position);
-        holder.accName.setText(account.getAccName());
-        holder.accEmail.setText(account.getAccEmail());
-        holder.accPass.setText(account.getAccPass());
-
-    }
-
-    @Override
-    public int getItemCount() {
-        return list.size();
-    }
-
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
-
-        TextView accName,accEmail,accPass;
-
-        public MyViewHolder(@NonNull View itemView) {
+    class accountViewholder extends RecyclerView.ViewHolder {
+        TextView account, email, password;
+        public accountViewholder(@NonNull View itemView)
+        {
             super(itemView);
 
-            accName=itemView.findViewById(R.id.accName);
-            accEmail=itemView.findViewById(R.id.accMail);
-            accPass=itemView.findViewById(R.id.accPassword);
+            account = itemView.findViewById(R.id.accName);
+            email = itemView.findViewById(R.id.accMail);
+            password = itemView.findViewById(R.id.accPassword);
         }
     }
 }
