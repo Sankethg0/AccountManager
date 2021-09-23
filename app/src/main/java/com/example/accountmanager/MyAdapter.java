@@ -32,9 +32,7 @@ public class MyAdapter extends FirebaseRecyclerAdapter<Account,MyAdapter.account
     onCreateViewHolder(@NonNull ViewGroup parent,
                        int viewType)
     {
-        View view
-                = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item, parent, false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent, false);
         return new MyAdapter.accountViewholder(view);
     }
     class accountViewholder extends RecyclerView.ViewHolder {

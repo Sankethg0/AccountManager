@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -31,6 +32,8 @@ public class Dashboard extends AppCompatActivity {
     MyAdapter adapter; // Create Object of the Adapter class
     DatabaseReference mbase; // Create object of the
     // Firebase Realtime Database
+    FirebaseAuth fAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +42,12 @@ public class Dashboard extends AppCompatActivity {
 
         // Create a instance of the database and get
         // its reference
-        mbase = FirebaseDatabase.getInstance().getReference();
+        fAuth=FirebaseAuth.getInstance();
+        String userId=fAuth.getCurrentUser().getUid();
+        mbase = FirebaseDatabase.getInstance().getReference().child("accounts").child(userId);
 
         recyclerView = findViewById(R.id.userList);
+        recyclerView.setHasFixedSize(true);
 
         // To display the Recycler view linearly
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

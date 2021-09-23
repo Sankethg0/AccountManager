@@ -44,12 +44,11 @@ public class addAcc extends AppCompatActivity {
                     Toast.makeText(addAcc.this,"Fill all the details",Toast.LENGTH_SHORT).show();
                 }else{
                     String userId=fAuth.getCurrentUser().getUid();
-                    DatabaseReference currentUserDb=FirebaseDatabase.getInstance().getReference().child("accounts").push();
+                    DatabaseReference currentUserDb=FirebaseDatabase.getInstance().getReference().child("accounts").child(userId).push();
                     Map userInfo=new HashMap<>();
-                    userInfo.put("UserId",userId);
-                    userInfo.put("Name of Account",accNme);
-                    userInfo.put("Email of Account",accMail);
-                    userInfo.put("Password of Account",accPwsrd);
+                    userInfo.put("accName",accNme);
+                    userInfo.put("accEmail",accMail);
+                    userInfo.put("accPass",accPwsrd);
                     currentUserDb.updateChildren(userInfo);
                     startActivity(new Intent(getApplicationContext(),Dashboard.class));
                     finish();
