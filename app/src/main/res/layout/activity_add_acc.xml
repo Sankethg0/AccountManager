@@ -4,63 +4,75 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".addAcc">
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/acme"
-        android:paddingTop="20dp"
+        android:layout_height="150dp"
+        android:paddingTop="8dp"
+        android:paddingRight="120dp"
+        android:paddingLeft="20dp"
+        android:background="@drawable/ic_wave"
         android:text="@string/addAcc"
         android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="45sp" />
+        android:textColor="@color/white"
+        android:textSize="35sp" />
+
+
     <EditText
         android:id="@+id/nameAcc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/black"
+        android:backgroundTint="@color/purple_700"
         android:ems="10"
         android:hint="@string/account"
         android:inputType="text"
         android:paddingTop="125dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
+        android:textColor="@color/purple_500"
+        android:textColorHint="@color/purple_500"
         android:textSize="20sp" />
 
     <EditText
         android:id="@+id/accEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/black"
+        android:backgroundTint="@color/purple_500"
         android:ems="10"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
         android:paddingTop="20dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
+        android:textColor="@color/purple_500"
+        android:textColorHint="@color/purple_500"
         android:textSize="20sp" />
+
     <EditText
         android:id="@+id/accPass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/black"
+        android:backgroundTint="@color/purple_500"
         android:ems="10"
         android:hint="@string/password"
         android:inputType="textPassword"
         android:paddingTop="20dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
+        android:textColor="@color/purple_500"
+        android:textColorHint="@color/purple_500"
         android:textSize="20sp" />
+
     <Button
         android:id="@+id/addAccBTN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
         android:layout_marginTop="50dp"
-        android:backgroundTint="@color/black"
+        android:backgroundTint="@color/purple_500"
         android:text="@string/addAcc" />
+
+    <View
+        android:id="@+id/bottomView"
+        android:layout_width="match_parent"
+        android:layout_height="149dp"
+        android:background="@drawable/ic_wave__1_" />
 
 
 </LinearLayout>

@@ -4,55 +4,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".Login">
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="150dp"
+        android:background="@drawable/ic_wave"
         android:fontFamily="@font/acme"
-        android:paddingTop="20dp"
+        android:paddingTop="8dp"
         android:text="@string/app_name"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="45sp" />
+
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingTop="100dp"
+        android:paddingRight="275dp"
         android:text="@string/login"
         android:textAlignment="center"
-        android:textColor="@color/black"
-        android:paddingTop="10dp"
-        android:textSize="20dp"
-        />
+        android:textColor="@color/purple_500"
+        android:textSize="35dp" />
 
     <EditText
         android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/black"
-        android:ems="10"
+        android:backgroundTint="@color/purple_500"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
-        android:paddingTop="125dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
+        android:paddingTop="50dp"
+        android:textColor="@color/purple_500"
+        android:textColorHint="@color/purple_500"
         android:textSize="20sp" />
 
     <EditText
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/black"
+        android:backgroundTint="@color/purple_500"
         android:ems="10"
         android:hint="@string/password"
         android:inputType="textPassword"
         android:paddingTop="20dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
+        android:textColor="@color/purple_500"
+        android:textColorHint="@color/purple_500"
         android:textSize="20sp" />
 
     <Button
@@ -61,20 +63,25 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
         android:layout_marginTop="50dp"
-        android:backgroundTint="@color/black"
+        android:backgroundTint="@color/purple_500"
         android:text="@string/loginBTN" />
 
     <TextView
         android:id="@+id/clickHereLogin"
-        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:onClick="gotoRegister"
         android:text="@string/newAcc"
         android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="17sp"
-        android:onClick="gotoRegister"/>
+        android:textColor="@color/purple_500"
+        android:textSize="17sp" />
 
+    <View
+        android:id="@+id/bottomView"
+        android:layout_width="match_parent"
+        android:layout_height="88dp"
+        android:background="@drawable/ic_wave__1_" />
 
 
 </LinearLayout>
